@@ -1,11 +1,11 @@
 {
   "author": "Mikita 'WhaleTee' Durunda",
-  "name": "com.whaletee.assembly",
-  "displayName": "Assembly Tools",
+  "name": "com.whaletee.common.runtime",
+  "displayName": "Common Tools",
   "version": "0.0.1",
   "keywords": [
     "unity",
-    "assembly",
+    "common",
     "tools"
   ]
 }

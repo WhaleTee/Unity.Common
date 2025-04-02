@@ -1,9 +1,7 @@
 {
   "name": "WhaleTee.Common.Runtime",
   "rootNamespace": "",
-  "references": [
-    "Unity.InputSystem"
-  ],
+  "references": [],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": true,

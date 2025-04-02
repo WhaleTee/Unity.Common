@@ -1,0 +1,13 @@
+{
+  "author": "Mikita 'WhaleTee' Durunda",
+  "name": "com.whaletee.reactive.tools",
+  "displayName": "Reactive Toolset",
+  "version": "0.0.1",
+  "description": "The Reactive toolset.",
+  "keywords": [
+    "unity",
+    "tools",
+    "r3",
+    "reactive"
+  ]
+}

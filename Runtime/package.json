@@ -1,0 +1,11 @@
+{
+  "author": "Mikita 'WhaleTee' Durunda",
+  "name": "com.whaletee.assembly",
+  "displayName": "Assembly Tools",
+  "version": "0.0.1",
+  "keywords": [
+    "unity",
+    "assembly",
+    "tools"
+  ]
+}

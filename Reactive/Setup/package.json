@@ -1,0 +1,14 @@
+{
+  "author": "Mikita 'WhaleTee' Durunda",
+  "name": "com.whaletee.reactive.setup",
+  "displayName": "Setup Reactive Toolset",
+  "version": "0.0.1",
+  "description": "A package for setting up Reactive toolset.",
+  "keywords": [
+    "setup",
+    "tools",
+    "unity",
+    "r3",
+    "reactive"
+  ]
+}

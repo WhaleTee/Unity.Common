@@ -1,0 +1,13 @@
+{
+  "author": "Mikita 'WhaleTee' Durunda",
+  "name": "com.whaletee.setup",
+  "displayName": "Setup Workspace",
+  "version": "0.0.1",
+  "description": "A package for setting up a workspace.",
+  "keywords": [
+    "setup",
+    "workspace",
+    "tools",
+    "unity"
+  ]
+}

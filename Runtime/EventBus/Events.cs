@@ -1,0 +1,1 @@
+﻿namespace WhaleTee.Runtime.EventBus { public interface Event { } }

@@ -1,0 +1,22 @@
+{
+  "name": "WhaleTee.Common.Reactive.Runtime",
+  "rootNamespace": "",
+  "references": [
+    "WhaleTee.Common.Runtime",
+    "Unity.InputSystem",
+    "R3.Unity"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": true,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "R3.dll",
+    "ObservableCollections.dll",
+    "ObservableCollections.R3.dll"
+  ],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

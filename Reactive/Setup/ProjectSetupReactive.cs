@@ -14,7 +14,7 @@ namespace WhaleTee.Reactive.Setup {
       NugetPackageInstaller.InstallIdentifier(new NugetPackageIdentifier("ObservableCollections.R3", null));
       UnityPackages.InstallPackages(
         new[] {
-          "git+https://github.com/WhaleTee/Unity.Common.git?path=/Tools",
+          "git+https://github.com/WhaleTee/Unity.Common.git?path=/Runtime",
           "git+https://github.com/WhaleTee/Unity.Common.git?path=/Reactive/Runtime",
         }
       );

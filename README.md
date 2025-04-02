@@ -18,7 +18,7 @@ If an instruction doesn't contain any steps, but URL only, it means that package
 #### Workspace Setup
 
 ```
-https://github.com/WhaleTee/Unity.Common.git?path=/Tools/Setup
+https://github.com/WhaleTee/Unity.Common.git?path=/Setup
 ```
 
 This package can import Flare Engine for 2D purposes, but Flare contains known bugs.</br>

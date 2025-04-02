@@ -1,19 +1,19 @@
 {
-  "name": "WhaleTee.Common.Reactive.Setup",
-  "rootNamespace": "",
-  "references": [
-    "WhaleTee.Common.Setup",
-    "NuGetForUnity"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": true,
-  "overrideReferences": true,
-  "precompiledReferences": [
-    "NuGetForUnity.PluginAPI.dll"
-  ],
-  "autoReferenced": false,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "WhaleTee.Common.Reactive.Setup",
+    "rootNamespace": "",
+    "references": [
+        "WhaleTee.Common.Setup",
+        "NuGetForUnity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NuGetForUnity.PluginAPI.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

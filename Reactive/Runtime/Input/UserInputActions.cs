@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace UserInput
+namespace WhaleTee.Reactive.Runtime.Input
 {
     public partial class @UserInputActions: IInputActionCollection2, IDisposable
     {

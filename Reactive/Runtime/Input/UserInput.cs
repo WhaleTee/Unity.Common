@@ -2,7 +2,6 @@
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UserInput;
 using WhaleTee.Runtime.Extensions;
 using WhaleTee.Runtime.ServiceLocator;
 

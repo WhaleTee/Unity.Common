@@ -6,7 +6,7 @@ using UserInput;
 using WhaleTee.Runtime.Extensions;
 using WhaleTee.Runtime.ServiceLocator;
 
-namespace WhaleTee.Reactive.Runtime.UserInput {
+namespace WhaleTee.Reactive.Runtime.Input {
   [Service]
   public sealed class UserInput : IDisposable {
     private static Camera MainCamera => Camera.main;

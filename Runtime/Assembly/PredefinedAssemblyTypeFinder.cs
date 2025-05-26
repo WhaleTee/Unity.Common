@@ -13,7 +13,12 @@ namespace WhaleTee.Runtime.Assembly {
     /// Enum that defines the specific predefined types of assemblies for navigation.
     /// </summary>    
     private enum AssemblyType {
-      AssemblyCSharp, AssemblyCSharpEditor, AssemblyCSharpEditorFirstPass, AssemblyCSharpFirstPass
+      AssemblyCSharp,
+      AssemblyCSharpEditor,
+      AssemblyCSharpEditorFirstPass,
+      AssemblyCSharpFirstPass,
+      WhaleTeeCommonRuntime,
+      WhaleTeeCommonReactiveRuntime
     }
 
     /// <summary>
@@ -27,6 +32,8 @@ namespace WhaleTee.Runtime.Assembly {
                "Assembly-CSharp-Editor" => AssemblyType.AssemblyCSharpEditor,
                "Assembly-CSharp-Editor-firstpass" => AssemblyType.AssemblyCSharpEditorFirstPass,
                "Assembly-CSharp-firstpass" => AssemblyType.AssemblyCSharpFirstPass,
+               "WhaleTee.Common.Runtime" => AssemblyType.WhaleTeeCommonRuntime,
+               "WhaleTee.Common.Reactive.Runtime" => AssemblyType.WhaleTeeCommonReactiveRuntime,
                var _ => null
              };
     }
@@ -144,6 +151,12 @@ namespace WhaleTee.Runtime.Assembly {
 
       assemblyTypes.TryGetValue(AssemblyType.AssemblyCSharpFirstPass, out var assemblyCSharpFirstPassTypes);
       AddTypesFromAssemblyByAttributes(assemblyCSharpFirstPassTypes, attributeList, types);
+
+      assemblyTypes.TryGetValue(AssemblyType.WhaleTeeCommonRuntime, out var assemblyWhaleTeeCommonTypes);
+      AddTypesFromAssemblyByAttributes(assemblyWhaleTeeCommonTypes, attributeList, types);
+
+      assemblyTypes.TryGetValue(AssemblyType.WhaleTeeCommonReactiveRuntime, out var assemblyWhaleTeeCommonReactiveTypes);
+      AddTypesFromAssemblyByAttributes(assemblyWhaleTeeCommonReactiveTypes, attributeList, types);
 
       return types;
     }

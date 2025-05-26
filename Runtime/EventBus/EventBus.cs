@@ -10,8 +10,8 @@ namespace WhaleTee.Runtime.EventBus {
 
     public static void Raise(T @event) {
       foreach (var binding in bindings) {
-        binding.onEvent.Invoke(@event);
-        binding.onEventNoArgs.Invoke();
+        binding.OnEvent.Invoke(@event);
+        binding.OnEventNoArgs.Invoke();
       }
     }
 

@@ -1,11 +1,11 @@
 ﻿namespace WhaleTee.Runtime.StateMachine {
   public class Transition {
-    public State to { get; }
-    public Predicate condition { get; }
+    public State To { get; }
+    public Predicate Condition { get; }
 
     public Transition(State to, Predicate condition) {
-      this.to = to;
-      this.condition = condition;
+      this.To = to;
+      this.Condition = condition;
     }
   }
 }

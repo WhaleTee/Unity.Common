@@ -6,7 +6,7 @@ namespace WhaleTee.Runtime.ServiceLocator {
     [SerializeField] private bool destroyOnLoad;
 
     protected override void Bootstrap() {
-      container.ConfigureAsGlobal(destroyOnLoad);
+      Container.ConfigureAsGlobal(destroyOnLoad);
     }
   }
 }

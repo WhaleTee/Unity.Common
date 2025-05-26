@@ -17,8 +17,8 @@ namespace WhaleTee.Runtime.DragSystem.Component.Rotation {
 
     protected override void Rotate() {
       var relativePosition = relative.position;
-      target.RotateAround(relativePosition, relative.up, pointerDelta.x * speed * Time.deltaTime);
-      target.RotateAround(relativePosition, relative.right, -pointerDelta.y * speed * Time.deltaTime);
+      target.RotateAround(relativePosition, relative.up, PointerDelta.x * speed * Time.deltaTime);
+      target.RotateAround(relativePosition, relative.right, -PointerDelta.y * speed * Time.deltaTime);
       target.LookAt(relative, Vector3.up);
     }
   }

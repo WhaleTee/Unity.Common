@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace WhaleTee.Runtime.Timers {
   public abstract class Timer : IDisposable {
-    public float currentTime { get; protected set; }
-    public bool isRunning { get; private set; }
+    public float CurrentTime { get; protected set; }
+    public bool IsRunning { get; private set; }
 
     protected float initialTime;
 
-    public float progress => Mathf.Clamp(currentTime / initialTime, 0, 1);
+    public float Progress => Mathf.Clamp(CurrentTime / initialTime, 0, 1);
 
     public Action onTimerStart = delegate { };
     public Action onTimerStop = delegate { };
@@ -20,30 +20,30 @@ namespace WhaleTee.Runtime.Timers {
     }
 
     public void Start() {
-      currentTime = initialTime;
+      CurrentTime = initialTime;
 
-      if (!isRunning) {
-        isRunning = true;
+      if (!IsRunning) {
+        IsRunning = true;
         TimerManager.RegisterTimer(this);
         onTimerStart.Invoke();
       }
     }
 
     public void Stop() {
-      if (isRunning) {
-        isRunning = false;
+      if (IsRunning) {
+        IsRunning = false;
         TimerManager.DeregisterTimer(this);
         onTimerStop.Invoke();
       }
     }
 
     public abstract void Tick();
-    public abstract bool isFinished { get; }
+    public abstract bool IsFinished { get; }
 
-    public void Resume() => isRunning = true;
-    public void Pause() => isRunning = false;
+    public void Resume() => IsRunning = true;
+    public void Pause() => IsRunning = false;
 
-    public virtual void Reset() => currentTime = initialTime;
+    public virtual void Reset() => CurrentTime = initialTime;
 
     public virtual void Reset(float newTime) {
       initialTime = newTime;

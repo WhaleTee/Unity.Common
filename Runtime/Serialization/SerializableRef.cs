@@ -2,9 +2,9 @@
 
 namespace WhaleTee.Runtime.Serialization {
   public interface SerializableRef {
-    Type refType { get; }
-    object serializedObject { get; }
-    bool hasSerializedObject { get; }
+    Type RefType { get; }
+    object SerializedObject { get; }
+    bool HasSerializedObject { get; }
 
     // True if the value has changed
     bool OnSerialize(object value);
@@ -13,6 +13,6 @@ namespace WhaleTee.Runtime.Serialization {
   }
 
   internal interface SerializableRef<out T> : SerializableRef where T : class {
-    T value { get; }
+    T Value { get; }
   }
 }

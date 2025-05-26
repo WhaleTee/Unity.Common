@@ -50,9 +50,9 @@ namespace WhaleTee.Runtime.ServiceLocator {
       scene.GetRootGameObjects(tmpSceneGameObjects);
 
       foreach (var go in tmpSceneGameObjects.Where(go => go.GetComponent<ServiceLocatorScene>() != null)) {
-        if (go.TryGetComponent(out ServiceLocatorScene bootstrapper) && bootstrapper.container != component) {
+        if (go.TryGetComponent(out ServiceLocatorScene bootstrapper) && bootstrapper.Container != component) {
           bootstrapper.BootstrapOnDemand();
-          return bootstrapper.container;
+          return bootstrapper.Container;
         }
       }
 

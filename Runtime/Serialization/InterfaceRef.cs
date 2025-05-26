@@ -5,11 +5,11 @@ using WhaleTee.Runtime.Extensions;
 namespace WhaleTee.Runtime.Serialization {
   [Serializable]
   public class InterfaceRef<T> : SerializableRef<T> where T : class {
-    public object serializedObject => implementer;
-    public Type refType => typeof(T);
-    public bool hasSerializedObject => implementer.OrNull() != null;
+    public object SerializedObject => implementer;
+    public Type RefType => typeof(T);
+    public bool HasSerializedObject => implementer.OrNull() != null;
 
-    public T value {
+    public T Value {
       get {
         if (!hasCast) {
           hasCast = true;

@@ -2,20 +2,20 @@
 
 namespace WhaleTee.Runtime.EventBus {
   public interface IEventBinding<T> {
-    public Action<T> onEvent { get; set; }
-    public Action onEventNoArgs { get; set; }
+    public Action<T> OnEvent { get; set; }
+    public Action OnEventNoArgs { get; set; }
   }
 
   public class EventBinding<T> : IEventBinding<T> where T : Event {
     private Action<T> onEvent = _ => { };
     private Action onEventNoArgs = () => { };
 
-    Action<T> IEventBinding<T>.onEvent {
+    Action<T> IEventBinding<T>.OnEvent {
       get => onEvent;
       set => onEvent = value;
     }
 
-    Action IEventBinding<T>.onEventNoArgs {
+    Action IEventBinding<T>.OnEventNoArgs {
       get => onEventNoArgs;
       set => onEventNoArgs = value;
     }

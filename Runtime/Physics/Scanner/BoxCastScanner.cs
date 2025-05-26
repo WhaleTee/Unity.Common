@@ -10,11 +10,11 @@ namespace WhaleTee.Runtime.Physics.Scanner {
     /// <summary>
     /// The position of the box cast.
     /// </summary>
-    private Vector3 position => transform.position + center;
+    private Vector3 Position => transform.position + center;
 
     protected override void CastNonAlloc(in RaycastHit[] hits, LayerMask layer) {
       UnityEngine.Physics.BoxCastNonAlloc(
-        position,
+        Position,
         size,
         direction,
         hits,

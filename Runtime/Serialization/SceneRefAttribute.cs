@@ -76,10 +76,10 @@ namespace WhaleTee.Runtime.Serialization {
   /// </summary>
   [AttributeUsage(AttributeTargets.Field)]
   public abstract class SceneRefAttribute : PropertyAttribute {
-    internal RefLoc loc { get; }
-    internal Flag flags { get; }
+    internal RefLoc Loc { get; }
+    internal Flag Flags { get; }
 
-    internal SceneRefFilter filter {
+    internal SceneRefFilter Filter {
       get {
         if (filterType == null)
           return null;
@@ -95,12 +95,12 @@ namespace WhaleTee.Runtime.Serialization {
       Flag flags,
       Type filter
     ) {
-      this.loc = loc;
-      this.flags = flags;
+      this.Loc = loc;
+      this.Flags = flags;
       filterType = filter;
     }
 
-    internal bool HasFlags(Flag flags) => (this.flags & flags) == flags;
+    internal bool HasFlags(Flag flags) => (this.Flags & flags) == flags;
   }
 
   /// <summary>

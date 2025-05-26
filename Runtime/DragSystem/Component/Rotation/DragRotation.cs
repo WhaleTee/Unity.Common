@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WhaleTee.Runtime.DragSystem.Component.Rotation {
   public abstract class DragRotation {
     private readonly int targetInstanceId;
-    protected Vector2 pointerDelta { get; private set; }
+    protected Vector2 PointerDelta { get; private set; }
 
     protected DragRotation(int targetInstanceId, Func<bool> condition = null) {
       this.targetInstanceId = targetInstanceId;

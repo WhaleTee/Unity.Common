@@ -7,18 +7,18 @@ namespace WhaleTee.Runtime.DragSystem.Component.Movement {
     private Vector2 pointerPosition;
     private Vector2 pointerOffset;
 
-    public bool moveX { get; set; }
-    public bool moveY { get; set; }
-    public float speed { get; set; }
+    public bool MoveX { get; set; }
+    public bool MoveY { get; set; }
+    public float Speed { get; set; }
 
-    private Transform cameraTransform => raycastCamera.transform;
-    private Vector2 transformScreenPosition => raycastCamera.WorldToScreenPoint(target.position);
+    private Transform CameraTransform => raycastCamera.transform;
+    private Vector2 TransformScreenPosition => raycastCamera.WorldToScreenPoint(target.position);
 
     public DragMovement(Transform target, Camera raycastCamera, bool moveX, bool moveY) {
       this.target = target;
       this.raycastCamera = raycastCamera;
-      this.moveX = moveX;
-      this.moveY = moveY;
+      this.MoveX = moveX;
+      this.MoveY = moveY;
 
       // EventBus<PointerPositionEvent>.Register(new EventBinding<PointerPositionEvent>(ctx => pointerPosition = ctx.Value));
       //
@@ -40,11 +40,11 @@ namespace WhaleTee.Runtime.DragSystem.Component.Movement {
     }
 
     protected virtual void Move(Vector2 targetPosition) {
-      if (targetPosition == transformScreenPosition) return;
+      if (targetPosition == TransformScreenPosition) return;
 
-      var velocity = (Vector2.Lerp(transformScreenPosition, targetPosition, speed * Time.deltaTime) - transformScreenPosition) * Time.deltaTime;
-      if (moveX) target.Translate(velocity.x, 0, 0, cameraTransform);
-      if (moveY) target.Translate(0, velocity.y, 0, cameraTransform);
+      var velocity = (Vector2.Lerp(TransformScreenPosition, targetPosition, Speed * Time.deltaTime) - TransformScreenPosition) * Time.deltaTime;
+      if (MoveX) target.Translate(velocity.x, 0, 0, CameraTransform);
+      if (MoveY) target.Translate(0, velocity.y, 0, CameraTransform);
     }
 
     public int GetTargetInstanceId() => target.gameObject.GetInstanceID();

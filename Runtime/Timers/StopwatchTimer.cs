@@ -8,11 +8,11 @@ namespace WhaleTee.Runtime.Timers {
     public StopwatchTimer() : base(0) { }
 
     public override void Tick() {
-      if (isRunning) {
-        currentTime += Time.deltaTime;
+      if (IsRunning) {
+        CurrentTime += Time.deltaTime;
       }
     }
 
-    public override bool isFinished => false;
+    public override bool IsFinished => false;
   }
 }

@@ -176,7 +176,7 @@ namespace WhaleTee.Runtime.Serialization {
         var attributedField = requiredFields[i];
         SceneRefAttribute attribute = attributedField.attribute;
 
-        if (attribute.loc == RefLoc.Anywhere) {
+        if (attribute.Loc == RefLoc.Anywhere) {
           continue;
         }
 
@@ -203,8 +203,8 @@ namespace WhaleTee.Runtime.Serialization {
 
       if (typeof(SerializableRef).IsAssignableFrom(fieldType)) {
         iSerializable = (SerializableRef)(existingValue ?? Activator.CreateInstance(fieldType));
-        fieldType = iSerializable.refType;
-        existingValue = iSerializable.serializedObject;
+        fieldType = iSerializable.RefType;
+        existingValue = iSerializable.SerializedObject;
       }
 
       if (attr.HasFlags(Flag.Editable)) {
@@ -237,11 +237,11 @@ namespace WhaleTee.Runtime.Serialization {
       object value = null;
 
       //INFO: when minimal unity version will be sufficiently high, explicit casts to object will not be necessary.
-      switch (attr.loc) {
+      switch (attr.Loc) {
         case RefLoc.Anywhere:
           if (isCollection ? typeof(SerializableRef).IsAssignableFrom(fieldType.GetElementType()) : iSerializable != null) {
             value = isCollection
-                    ? (existingValue as SerializableRef[])?.Select(existingRef => GetComponentIfWrongType(existingRef.serializedObject, elementType))
+                    ? (existingValue as SerializableRef[])?.Select(existingRef => GetComponentIfWrongType(existingRef.SerializedObject, elementType))
                     .ToArray()
                     : GetComponentIfWrongType(existingValue, elementType);
           }
@@ -273,14 +273,14 @@ namespace WhaleTee.Runtime.Serialization {
           value = GetComponentsInScene(elementType, includeInactive, isCollection, excludeSelf);
           break;
         default:
-          throw new Exception($"Unhandled Loc={attr.loc}");
+          throw new Exception($"Unhandled Loc={attr.Loc}");
       }
 
       if (value == null) {
         return existingValue;
       }
 
-      SceneRefFilter filter = attr.filter;
+      SceneRefFilter filter = attr.Filter;
 
       if (isCollection) {
         var realElementType = GetElementType(fieldType);
@@ -387,7 +387,7 @@ namespace WhaleTee.Runtime.Serialization {
       var isOverridable = attr.HasFlags(Flag.EditableAnywhere);
 
       if (value is SerializableRef ser) {
-        value = ser.serializedObject;
+        value = ser.SerializedObject;
       }
 
       if (IsEmptyOrNull(value, isCollection)) {
@@ -412,7 +412,7 @@ namespace WhaleTee.Runtime.Serialization {
           var o = enumerator.Current;
 
           if (o is SerializableRef serObj) {
-            o = serObj.serializedObject;
+            o = serObj.SerializedObject;
           }
 
           if (o != null) {
@@ -424,7 +424,7 @@ namespace WhaleTee.Runtime.Serialization {
                 c.gameObject
               );
 
-            validationSuccess &= ValidateRefLocation(attr.loc, c, field, o);
+            validationSuccess &= ValidateRefLocation(attr.Loc, c, field, o);
           } else {
             Debug.LogError($"{c.GetType().Name} missing required element ref in array '{field.Name}'", c.gameObject);
             validationSuccess = false;
@@ -441,7 +441,7 @@ namespace WhaleTee.Runtime.Serialization {
         if (attr.HasFlags(Flag.ExcludeSelf) && value is Component valueC && valueC.gameObject == c.gameObject)
           Debug.LogError($"{c.GetType().Name} {fieldType.Name} ref '{field.Name}' cannot be on the same GameObject", c.gameObject);
 
-        return ValidateRefLocation(attr.loc, c, field, value);
+        return ValidateRefLocation(attr.Loc, c, field, value);
       }
     }
 
@@ -524,7 +524,7 @@ namespace WhaleTee.Runtime.Serialization {
 
     private static bool IsEmptyOrNull(object obj, bool isCollection) {
       if (obj is SerializableRef ser) {
-        return !ser.hasSerializedObject;
+        return !ser.HasSerializedObject;
       }
 
       return obj == null || obj.Equals(null) || (isCollection && ((IEnumerable)obj).CountEnumerable() == 0);

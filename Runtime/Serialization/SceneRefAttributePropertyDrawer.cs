@@ -21,8 +21,8 @@ namespace WhaleTee.Runtime.Serialization {
     private Type elementType;
     private string typeName;
 
-    private SceneRefAttribute sceneRefAttribute => (SceneRefAttribute)attribute;
-    private bool editable => sceneRefAttribute.HasFlags(Flag.Editable);
+    private SceneRefAttribute SceneRefAttribute => (SceneRefAttribute)attribute;
+    private bool Editable => SceneRefAttribute.HasFlags(Flag.Editable);
 
 // unity 2022.2 makes UIToolkit the default for inspectors
     #if UNITY_2022_2_OR_NEWER
@@ -44,7 +44,7 @@ namespace WhaleTee.Runtime.Serialization {
       root.Add(helpBox);
 
       propertyField = new PropertyField(property);
-      propertyField.SetEnabled(editable);
+      propertyField.SetEnabled(Editable);
       root.Add(propertyField);
 
       if (canValidateType) {
@@ -85,7 +85,7 @@ namespace WhaleTee.Runtime.Serialization {
     private void UpdateHelpBox() {
       var isSatisfied = IsSatisfied(serializedProperty);
       helpBox.style.display = isSatisfied ? DisplayStyle.None : DisplayStyle.Flex;
-      var message = $"Missing {serializedProperty.propertyPath} ({typeName}) reference on {sceneRefAttribute.loc}!";
+      var message = $"Missing {serializedProperty.propertyPath} ({typeName}) reference on {SceneRefAttribute.Loc}!";
       helpBox.text = message;
     }
     #endif
@@ -97,14 +97,14 @@ namespace WhaleTee.Runtime.Serialization {
       if (!IsSatisfied(property)) {
         var helpBoxPos = position;
         helpBoxPos.height = EditorGUIUtility.singleLineHeight * 2;
-        var message = $"Missing {property.propertyPath} ({typeName}) reference on {sceneRefAttribute.loc}!";
+        var message = $"Missing {property.propertyPath} ({typeName}) reference on {SceneRefAttribute.Loc}!";
         EditorGUI.HelpBox(helpBoxPos, message, MessageType.Error);
         position.height = EditorGUI.GetPropertyHeight(property, label);
         position.y += helpBoxPos.height;
       }
 
       var wasEnabled = GUI.enabled;
-      GUI.enabled = editable;
+      GUI.enabled = Editable;
       EditorGUI.PropertyField(position, property, label, true);
       GUI.enabled = wasEnabled;
     }
@@ -135,7 +135,7 @@ namespace WhaleTee.Runtime.Serialization {
 
     /// <summary>Is this field Satisfied with a value or optional</summary>
     private bool IsSatisfied(SerializedProperty property) {
-      if (!canValidateType || sceneRefAttribute.HasFlags(Flag.Optional))
+      if (!canValidateType || SceneRefAttribute.HasFlags(Flag.Optional))
         return true;
 
       return property.objectReferenceValue != null;

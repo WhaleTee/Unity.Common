@@ -8,15 +8,15 @@ namespace WhaleTee.Runtime.Timers {
     public CountdownTimer(float value) : base(value) { }
 
     public override void Tick() {
-      if (isRunning && currentTime > 0) {
-        currentTime -= Time.deltaTime;
+      if (IsRunning && CurrentTime > 0) {
+        CurrentTime -= Time.deltaTime;
       }
 
-      if (isRunning && currentTime <= 0) {
+      if (IsRunning && CurrentTime <= 0) {
         Stop();
       }
     }
 
-    public override bool isFinished => currentTime <= 0;
+    public override bool IsFinished => CurrentTime <= 0;
   }
 }

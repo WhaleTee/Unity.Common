@@ -17,7 +17,7 @@ namespace WhaleTee.Runtime.DragSystem.Component.Rotation {
     }
 
     protected override void Rotate() {
-      target.Rotate(relative ? relative.up : Vector3.up, Vector3.Dot(pointerDelta * (speed * Time.deltaTime), Vector3.left), Space.World);
+      target.Rotate(relative ? relative.up : Vector3.up, Vector3.Dot(PointerDelta * (speed * Time.deltaTime), Vector3.left), Space.World);
     }
   }
 }

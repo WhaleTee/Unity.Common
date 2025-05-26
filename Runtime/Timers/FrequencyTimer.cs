@@ -6,9 +6,9 @@ namespace WhaleTee.Runtime.Timers {
   /// Timer that ticks at a specific frequency. (N times per second)
   /// </summary>
   public class FrequencyTimer : Timer {
-    public int ticksPerSecond { get; private set; }
+    public int TicksPerSecond { get; private set; }
 
-    public Action onTick = delegate { };
+    public readonly Action onTick = delegate { };
 
     private float timeThreshold;
 
@@ -17,20 +17,20 @@ namespace WhaleTee.Runtime.Timers {
     }
 
     public override void Tick() {
-      if (isRunning && currentTime >= timeThreshold) {
-        currentTime -= timeThreshold;
+      if (IsRunning && CurrentTime >= timeThreshold) {
+        CurrentTime -= timeThreshold;
         onTick.Invoke();
       }
 
-      if (isRunning && currentTime < timeThreshold) {
-        currentTime += Time.deltaTime;
+      if (IsRunning && CurrentTime < timeThreshold) {
+        CurrentTime += Time.deltaTime;
       }
     }
 
-    public override bool isFinished => !isRunning;
+    public override bool IsFinished => !IsRunning;
 
     public override void Reset() {
-      currentTime = 0;
+      CurrentTime = 0;
     }
 
     public void Reset(int newTicksPerSecond) {
@@ -39,8 +39,8 @@ namespace WhaleTee.Runtime.Timers {
     }
 
     void CalculateTimeThreshold(int ticksPerSecond) {
-      this.ticksPerSecond = ticksPerSecond;
-      timeThreshold = 1f / this.ticksPerSecond;
+      this.TicksPerSecond = ticksPerSecond;
+      timeThreshold = 1f / this.TicksPerSecond;
     }
   }
 }

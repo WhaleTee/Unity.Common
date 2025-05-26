@@ -10,7 +10,7 @@ namespace WhaleTee.Runtime.Serialization {
     private const string PREFS_KEY = "KBCore/ValidateRefsOnSave";
     private const string MENU_ITEM_TEXT = "Tools/KBCore/Validate Refs on Save";
 
-    public static bool validateRefsOnSave {
+    public static bool ValidateRefsOnSave {
       get => EditorPrefs.GetBool(PREFS_KEY, false);
       private set => EditorPrefs.SetBool(PREFS_KEY, value);
     }
@@ -21,19 +21,19 @@ namespace WhaleTee.Runtime.Serialization {
 
     [MenuItem(MENU_ITEM_TEXT, false, 1000)]
     public static void ToggleValidateRefsOnSave() {
-      validateRefsOnSave = !validateRefsOnSave;
-      Menu.SetChecked(MENU_ITEM_TEXT, validateRefsOnSave);
+      ValidateRefsOnSave = !ValidateRefsOnSave;
+      Menu.SetChecked(MENU_ITEM_TEXT, ValidateRefsOnSave);
     }
 
     [MenuItem(MENU_ITEM_TEXT, true)]
     public static bool ToggleValidateRefsOnSaveValidate() {
-      Menu.SetChecked(MENU_ITEM_TEXT, validateRefsOnSave);
+      Menu.SetChecked(MENU_ITEM_TEXT, ValidateRefsOnSave);
 
       return true;
     }
 
     private static void OnSceneSaving(Scene scene, string path) {
-      if (!validateRefsOnSave) return;
+      if (!ValidateRefsOnSave) return;
 
       SceneRefAttributeValidator.ValidateAllRefs();
     }

@@ -10,8 +10,8 @@ namespace WhaleTee.Runtime.EventBus {
   /// Contains methods and properties related to event buses and event types in the Unity application.
   /// </summary>
   public static class EventBusUtil {
-    private static IReadOnlyList<Type> eventTypes { get; set; }
-    private static IReadOnlyList<Type> eventBusTypes { get; set; }
+    private static IReadOnlyList<Type> EventTypes { get; set; }
+    private static IReadOnlyList<Type> EventBusTypes { get; set; }
 
     #if UNITY_EDITOR
 
@@ -46,15 +46,15 @@ namespace WhaleTee.Runtime.EventBus {
     /// </summary>
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Initialize() {
-      eventTypes = PredefinedAssemblyTypeFinder.GetTypes(typeof(Event));
-      eventBusTypes = InitializeAllBuses();
+      EventTypes = PredefinedAssemblyTypeFinder.GetTypes(typeof(Event));
+      EventBusTypes = InitializeAllBuses();
     }
 
     private static List<Type> InitializeAllBuses() {
       var busTypes = new List<Type>();
       var typedef = typeof(EventBus<>);
 
-      foreach (var eventType in eventTypes) {
+      foreach (var eventType in EventTypes) {
         var busType = typedef.MakeGenericType(eventType);
         busTypes.Add(busType);
         Debug.Log($"Initialized EventBus<{eventType.Name}>");
@@ -69,7 +69,7 @@ namespace WhaleTee.Runtime.EventBus {
     private static void ClearAllBuses() {
       Debug.Log("Clearing all buses...");
 
-      foreach (var busType in eventBusTypes) {
+      foreach (var busType in EventBusTypes) {
         var clearMethod = busType.GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);
         clearMethod?.Invoke(null, null);
       }

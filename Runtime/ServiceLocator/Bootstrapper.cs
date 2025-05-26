@@ -8,7 +8,7 @@ namespace WhaleTee.Runtime.ServiceLocator {
     private ServiceLocator locator;
     private bool bootstrapped;
     
-    internal ServiceLocator container => locator.OrNull() ?? (locator = GetComponent<ServiceLocator>());
+    internal ServiceLocator Container => locator.OrNull() ?? (locator = GetComponent<ServiceLocator>());
 
     private void Awake() => BootstrapOnDemand();
 

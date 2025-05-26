@@ -17,12 +17,18 @@ namespace WhaleTee.Reactive.Runtime.Input {
     public ReactiveProperty<Vector2> MousePosition { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
     public ReactiveProperty<Vector2> MousePositionDeltaUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
 
-    public ReactiveProperty<Vector2> MousePositionDeltaFixedUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
+    public ReactiveProperty<Vector2> MousePositionDeltaFixedUpdate { get; } =
+      new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
 
     public ReactiveProperty<Vector2> ScrollWheel { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
     public ReactiveProperty<Vector2> ScrollWheelDeltaUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
 
-    public ReactiveProperty<Vector2> ScrollWheelDeltaFixedUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
+    public ReactiveProperty<Vector2> ScrollWheelDeltaFixedUpdate { get; } =
+      new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
+
+    public ReactiveProperty<Vector2> Move { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
+    public ReactiveProperty<Vector2> MoveUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
+    public ReactiveProperty<Vector2> MoveFixedUpdate { get; } = new ReactiveProperty<Vector2>(Vector2.zero, new Vector2EqualityComparer());
 
     /// <summary>
     /// returns the mouse position in world space related to the main camera, if the camera is not found returns Vector3.zero
@@ -61,12 +67,11 @@ namespace WhaleTee.Reactive.Runtime.Input {
 
     private void UpdateMouseProperties() {
       Observable.EveryUpdate(UnityFrameProvider.EarlyUpdate)
-      .Subscribe(
-        _ => {
-          Click.Value = inputActions.UI.Click.IsPressed();
-          RightClick.Value = inputActions.UI.Click.IsPressed();
-          MiddleClick.Value = inputActions.UI.Click.IsPressed();
-        }
+      .Subscribe(_ => {
+                   Click.Value = inputActions.UI.Click.IsPressed();
+                   RightClick.Value = inputActions.UI.Click.IsPressed();
+                   MiddleClick.Value = inputActions.UI.Click.IsPressed();
+                 }
       )
       .AddTo(ref subscriptions);
 
@@ -74,13 +79,12 @@ namespace WhaleTee.Reactive.Runtime.Input {
         handler => inputActions.UI.ScrollWheel.performed += handler,
         handler => inputActions.UI.ScrollWheel.performed -= handler
       )
-      .Subscribe(
-        ctx => {
-          var value = ctx.ReadValue<Vector2>();
-          ScrollWheel.Value = value;
-          ScrollWheelDeltaUpdate.Value += value;
-          ScrollWheelDeltaFixedUpdate.Value += value;
-        }
+      .Subscribe(ctx => {
+                   var value = ctx.ReadValue<Vector2>();
+                   ScrollWheel.Value = value;
+                   ScrollWheelDeltaUpdate.Value += value;
+                   ScrollWheelDeltaFixedUpdate.Value += value;
+                 }
       )
       .AddTo(ref subscriptions);
 
@@ -88,30 +92,29 @@ namespace WhaleTee.Reactive.Runtime.Input {
         handler => inputActions.Player.Look.performed += handler,
         handler => inputActions.Player.Look.performed -= handler
       )
-      .Subscribe(
-        ctx => {
-          var value = ctx.ReadValue<Vector2>();
-          MousePositionDeltaUpdate.Value += value;
-          MousePositionDeltaFixedUpdate.Value += value;
-        }
+      .Subscribe(ctx => {
+                   var value = ctx.ReadValue<Vector2>();
+                   MousePositionDeltaUpdate.Value += value;
+                   MousePositionDeltaFixedUpdate.Value += value;
+                 }
       )
       .AddTo(ref subscriptions);
 
       Observable.EveryUpdate(UnityFrameProvider.PreLateUpdate)
-      .Subscribe(
-        _ => {
-          MousePositionDeltaUpdate.Value = Vector2.zero;
-          ScrollWheelDeltaUpdate.Value = Vector2.zero;
-        }
+      .Subscribe(_ => {
+                   MousePositionDeltaUpdate.Value = Vector2.zero;
+                   ScrollWheelDeltaUpdate.Value = Vector2.zero;
+                   MoveUpdate.Value = Vector2.zero;
+                 }
       )
       .AddTo(ref subscriptions);
 
       Observable.EveryUpdate(UnityFrameProvider.PostFixedUpdate)
-      .Subscribe(
-        _ => {
-          MousePositionDeltaFixedUpdate.Value = Vector2.zero;
-          ScrollWheelDeltaFixedUpdate.Value = Vector2.zero;
-        }
+      .Subscribe(_ => {
+                   MousePositionDeltaFixedUpdate.Value = Vector2.zero;
+                   ScrollWheelDeltaFixedUpdate.Value = Vector2.zero;
+                   MoveFixedUpdate.Value = Vector2.zero;
+                 }
       )
       .AddTo(ref subscriptions);
 
@@ -120,6 +123,26 @@ namespace WhaleTee.Reactive.Runtime.Input {
         handler => inputActions.UI.Point.performed -= handler
       )
       .Subscribe(ctx => MousePosition.Value = ctx.ReadValue<Vector2>())
+      .AddTo(ref subscriptions);
+
+      Observable.FromEvent<InputAction.CallbackContext>(
+        handler => inputActions.Player.Move.performed += handler,
+        handler => inputActions.Player.Move.performed -= handler
+      )
+      .Subscribe(ctx => {
+                   var value = ctx.ReadValue<Vector2>();
+                   Move.Value = value;
+                   MoveUpdate.Value += value;
+                   MoveFixedUpdate.Value += value;
+                 }
+      )
+      .AddTo(ref subscriptions);
+
+      Observable.FromEvent<InputAction.CallbackContext>(
+        handler => inputActions.Player.Move.canceled += handler,
+        handler => inputActions.Player.Move.canceled -= handler
+      )
+      .Subscribe(_ => Move.Value = Vector2.zero)
       .AddTo(ref subscriptions);
     }
 

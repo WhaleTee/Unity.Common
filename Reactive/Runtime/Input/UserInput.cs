@@ -69,8 +69,8 @@ namespace WhaleTee.Reactive.Runtime.Input {
       Observable.EveryUpdate(UnityFrameProvider.EarlyUpdate)
       .Subscribe(_ => {
                    Click.Value = inputActions.UI.Click.IsPressed();
-                   RightClick.Value = inputActions.UI.Click.IsPressed();
-                   MiddleClick.Value = inputActions.UI.Click.IsPressed();
+                   RightClick.Value = inputActions.UI.RightClick.IsPressed();
+                   MiddleClick.Value = inputActions.UI.MiddleClick.IsPressed();
                  }
       )
       .AddTo(ref subscriptions);
